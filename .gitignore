@@ -1,0 +1,16 @@
+# Virtual environments and editor settings
+.venv/
+.venv311/
+.vscode/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Dataset (large; check its licence before publishing)
+data/
+
+# Generated files, rebuilt by the scripts
+cache/
+runs/
+real_test/

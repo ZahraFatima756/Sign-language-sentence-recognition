@@ -1,0 +1,5 @@
+# Live camera, recording and the real-test tools. Needs Python 3.10, 3.11 or 3.12.
+# mediapipe 0.10.14 has no wheel for Python 3.13, so use Python 3.11 for this file.
+mediapipe==0.10.14
+arabic-reshaper>=3.0
+python-bidi>=0.4
