@@ -90,43 +90,7 @@ printed in the terminal, which is always correct.
 
 ---
 
-## 4. Adding the missing words (needed for 10 of the 20 sentences)
-
-Ten sentences need words the dataset does not have: **ہیں, یہ, ہے, کام, اور**. Those
-sentences show as "blocked" in the output of step 2. To unblock them, record each word
-the same way the dataset was recorded:
-
-```bash
-python 06_record.py --word "ہیں" --count 40
-python 06_record.py --word "یہ"   --count 40
-python 06_record.py --word "ہے"   --count 40
-python 06_record.py --word "کام"  --count 40
-python 06_record.py --word "اور"  --count 40
-```
-
-Controls: `S` start, `R` stop and save, `Q` quit. Then re-run steps 1 to 4. The new
-words are picked up automatically.
-
----
-
-## 5. Honest testing with real signing (do this before you report accuracy)
-
-The stitched test set is built from the same signs, so its scores are optimistic.
-The honest test is **continuous signing you record yourself**.
-
-```bash
-python 06_record.py --sentence 5 --count 10 --signer alice
-python 06_record.py --sentence 5 --count 10 --signer bilal
-python 07_evaluate_real.py
-```
-
-Aim for 10 to 20 recordings from 2 or 3 people. Each recording is one full sentence,
-signed the way you would normally sign it. `07_evaluate_real.py` writes a per-signer
-table to `runs/reports/real_test_results.md`.
-
----
-
-## 6. The 11 signs in the dataset
+## 4. The 11 signs in the dataset
 
 | Folder (as in dataset) | Sign used in sentences.csv                                          |
 | ---------------------- | ------------------------------------------------------------------- |
@@ -149,19 +113,7 @@ The live app shows only the text from `sentences.csv`, never dataset folder name
 
 ---
 
-## 7. Sentences
-
-`sentences.csv` holds the 20 sentences with their sign sequence. Each sentence is one
-row: `id, urdu, signs` (signs separated by `|`). Edit it to change the sentences or
-the word order. The word order must match PSL, not Urdu, so check it with your
-supervisor or a PSL signer.
-
-Currently ready: 1, 2, 3, 4, 8, 11, 13, 17, 18, 20. Blocked until the missing words
-are recorded: 5, 6, 7, 9, 10, 12, 14, 15, 16, 19.
-
----
-
-## 8. How the stitched data is made
+## 5. How the stitched data is made
 
 Each stitched variant is built by:
 
@@ -180,7 +132,7 @@ Change `VARIANTS_PER_SENTENCE` in `config.py` to make more or fewer.
 
 ---
 
-## 9. Results
+## 6. Results
 
 Model: best checkpoint, epoch 4 of a run that was stopped after epoch 6 (selected on
 validation word error rate). Full tables: `runs/reports/test_results.md`.
@@ -258,8 +210,3 @@ runs/                      generated: transcripts, model, reports, examples
 - Tested here: clip decoding and splitting on all 751 dataset clips, stitching and the
   seam montage, training (stopped after epoch 6), held-out evaluation, the 15 unit tests,
   Urdu shaping output, and the real-recording evaluator on a stand-in clip.
-- **Not tested here:** the live camera script, the recorder, MediaPipe itself (the
-  sandbox has no webcam and the pinned MediaPipe version was not installed), and a
-  real Urdu font on screen. Run `05_live_camera.py --show-skeleton` once on your laptop
-  before relying on it.
-
